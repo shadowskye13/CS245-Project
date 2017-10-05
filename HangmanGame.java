@@ -13,11 +13,29 @@ import java.util.Random;
 
 public class HangmanGame {
     private String[] wordToGuess = new String[]{"abstract", "cemetery", "nurse",
-                                        "pharmacy", "climbing"};  
+                                        "pharmacy", "climbing"}; 
+    private String chosenWord;
+    private char[] letterBlanks;
     private Random wordGen = new Random();
     
-    public String pickWord() {
+    private String pickWord() {
         int word = wordGen.nextInt(5);
-        return wordToGuess[word];
+        chosenWord = wordToGuess[word];
+        return chosenWord;
+    }
+    
+    private void initLetters() {
+        letterBlanks = new char[pickWord().length()];
+    }
+    
+    private boolean checkLetter(char a) {
+       boolean hasLetter = false;
+       for(int i = 0; i < letterBlanks.length; i++) {
+           if(chosenWord.charAt(i) == a) {
+               letterBlanks[i] = a;
+               hasLetter = true;
+           }
+       } 
+       return hasLetter;
     }
 }
