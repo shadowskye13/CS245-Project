@@ -51,7 +51,8 @@ public class HangmanPanel extends JPanel{
     private String selectedWord;
     private JLabel hangmanPic, 
                    dateTimeLabel, 
-                   titleLabel, 
+                   titleLabel,
+                   descriptionLabel,
                    scoreLabel;
     private int score, 
                 miss, 
@@ -73,7 +74,9 @@ public class HangmanPanel extends JPanel{
         miss = 0 ;
         guessed = 0;
 
-        // Display game title
+        // Display game title and description
+        descriptionLabel = new JLabel("Welcome!");
+        add(descriptionLabel);
         titleLabel = new JLabel("Hangman");
         titleLabel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         titleLabel.setFont(new Font("Tahoma", 1, 30));
@@ -97,6 +100,7 @@ public class HangmanPanel extends JPanel{
             public void actionPerformed(ActionEvent ae) {
                 score = 0;
                 scoreLabel.setText("Score: " + score);
+                disableButtons();
                 finishGame("Game skipped");
             }
         });
@@ -250,11 +254,15 @@ public class HangmanPanel extends JPanel{
      */
     private void finishGame(String result) {
         // Disable all buttons
+        disableButtons();
+        descriptionLabel.setText(result);
+        repaint();
+    }
+
+    private void disableButtons() {
         for(Map.Entry<String, JButton> entry : letterButtonMapper.entrySet()) {
             entry.getValue().setEnabled(false);
         }
-
-        titleLabel.setText(result);
-        repaint();
+        skipButton.setEnabled(false);
     }
 }
