@@ -20,6 +20,7 @@ public class Credits extends JPanel {
     public Credits() {
         initComponents();
         this.setSize(new Dimension(600,400));
+        this.setBackground(new java.awt.Color(153, 204, 255));
     }
 
     @SuppressWarnings("unchecked")
@@ -31,8 +32,6 @@ public class Credits extends JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-
-        setBackground(new java.awt.Color(153, 204, 255));
 
         jLabel1.setFont(new java.awt.Font("Trattatello", 0, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -46,12 +45,12 @@ public class Credits extends JPanel {
 
         jLabel3.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Wing Hung Lau, 000000000");
+        jLabel3.setText("Wing Hung Lau, 010927657");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jLabel4.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Nelly Liu Peng, 111111111");
+        jLabel4.setText("Nelly Liu Peng, 010180248");
 
         jButton1.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
         jButton1.setText("Back");

@@ -56,7 +56,7 @@ public class MenuScreen extends JPanel{
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("compass-symbol.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/compass-symbol.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -95,7 +95,7 @@ public class MenuScreen extends JPanel{
      */
     private void jButton1ActionPerformed(ActionEvent evt) {
         this.removeAll();
-        this.add(new HangmanGUI());
+        this.add(new HangmanPanel());
         this.revalidate();
         this.repaint();
     }

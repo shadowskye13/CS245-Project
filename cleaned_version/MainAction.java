@@ -32,7 +32,7 @@ public class MainAction extends javax.swing.JFrame{
         add(titlePanel);
         setSize(new Dimension(600,400));
         setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
     }
 
