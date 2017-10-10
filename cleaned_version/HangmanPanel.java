@@ -117,8 +117,8 @@ public class HangmanPanel extends JPanel{
     /**
      * Updates the picture of hangman based on miss
      */
-    private void changeHangman(int stage) {
-        switch(stage) {
+    private void changeHangman() {
+        switch(miss) {
             case 1:
                 hangmanPic.setIcon(hangmanHead);
                 break;
@@ -205,6 +205,8 @@ public class HangmanPanel extends JPanel{
                         score-=10;
                         scoreLabel.setText("Score: " + score);
                         miss++;
+                        // update hangman pic
+                        changeHangman();
                     }
                     if(guessed == selectedWord.length()) {
                         finishGame("You won!");
