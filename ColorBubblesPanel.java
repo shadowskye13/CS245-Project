@@ -37,6 +37,8 @@ public class ColorBubblesPanel extends JPanel{
    
    private JButton button1,button2,button3,button4,button5;
    private JLabel chosenColor;
+   private JLabel endGame;
+   private JLabel scoreSign;
    private int score,numRounds;
    private ColorBubbles game;
    
@@ -44,6 +46,7 @@ public class ColorBubblesPanel extends JPanel{
        game = new ColorBubbles();
        this.setSize(new Dimension(600,400));
        this.setBackground(new Color(200,200,200));
+       
        initComponents();
        
    }
@@ -206,15 +209,35 @@ public class ColorBubblesPanel extends JPanel{
        }
        
        game.reset();
+       button1.setIcon(getRandIcon());
+       button2.setIcon(getRandIcon());
+       button3.setIcon(getRandIcon());
+       button4.setIcon(getRandIcon());
+       button5.setIcon(getRandIcon());
+       chosenColor.setText(game.getChosenColor());
+       chosenColor.setForeground(game.getStringColor());
+       this.repaint();
        
        numRounds++;
        if(numRounds > 5) {
+           
            endGame();
        }
    }
    
    private void endGame() {
+       remove(chosenColor);
        
+       
+       endGame = new JLabel("End of Game");
+       endGame.setSize(new Dimension(200,100));
+       endGame.setFont(new Font("Tratello",0,16));
+       add(endGame);
+       
+       scoreSign = new JLabel("Your score: " + score);
+       scoreSign.setSize(new Dimension(200,100));
+       scoreSign.setFont(new Font("Tratello",0,16));
+       add(scoreSign);
    }
    
 }
