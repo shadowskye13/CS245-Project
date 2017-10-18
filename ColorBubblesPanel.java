@@ -8,6 +8,7 @@
  *
  * @author SamanthaRose
  */
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -37,13 +38,13 @@ public class ColorBubblesPanel extends JPanel{
    
    private JButton button1,button2,button3,button4,button5;
    private JLabel chosenColor;
-   private JLabel endGame;
-   private JLabel scoreSign;
    private int score,numRounds;
    private ColorBubbles game;
    
-   public ColorBubblesPanel() {
+   public ColorBubblesPanel(int score) {
        game = new ColorBubbles();
+       this.score = score;
+       //this.setLayout(new BorderLayout());
        this.setSize(new Dimension(600,400));
        this.setBackground(new Color(200,200,200));
        
@@ -56,7 +57,6 @@ public class ColorBubblesPanel extends JPanel{
        numRounds = 1;
        
        button1 = new JButton();
-       button1.setIcon(getRandIcon());
        button1.setSize(new Dimension(50,50));
        button1.setLocation(genRandCoordinate1());
        button1.addActionListener(new ActionListener() {
@@ -68,7 +68,6 @@ public class ColorBubblesPanel extends JPanel{
        add(button1);
        
        button2 = new JButton();
-       button2.setIcon(getRandIcon());
        button2.setSize(new Dimension(50,50));
        button2.setLocation(genRandCoordinate2());
        button2.addActionListener(new ActionListener() {
@@ -80,7 +79,6 @@ public class ColorBubblesPanel extends JPanel{
        add(button2);
        
        button3 = new JButton();
-       button3.setIcon(getRandIcon());
        button3.setSize(new Dimension(50,50));
        button3.setLocation(genRandCoordinate3());
        button3.addActionListener(new ActionListener() {
@@ -92,7 +90,6 @@ public class ColorBubblesPanel extends JPanel{
        add(button3);
        
        button4 = new JButton();
-       button4.setIcon(getRandIcon());
        button4.setSize(new Dimension(50,50));
        button4.setLocation(genRandCoordinate4());
        button4.addActionListener(new ActionListener() {
@@ -104,7 +101,6 @@ public class ColorBubblesPanel extends JPanel{
        add(button4);
        
        button5 = new JButton();
-       button5.setIcon(getRandIcon());
        button5.setSize(new Dimension(50,50));
        button5.setLocation(genRandCoordinate5());
        button5.addActionListener(new ActionListener() {
@@ -115,11 +111,13 @@ public class ColorBubblesPanel extends JPanel{
        });
        add(button5);
        
+       checkRand();
+       
        chosenColor = new JLabel();
        chosenColor.setText(game.getChosenColor());
        chosenColor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
        chosenColor.setSize(new Dimension(200,100));
-       chosenColor.setFont(new Font("Tratello",0,16));
+       chosenColor.setFont(new java.awt.Font("Trattatello",0,16));
        chosenColor.setForeground(game.getStringColor());
        chosenColor.setLocation(275, 200);
        add(chosenColor);
@@ -163,6 +161,32 @@ public class ColorBubblesPanel extends JPanel{
        int y = 400 - rand.nextInt(100) - 75;
        Point p = new Point(x,y);
        return p;
+   }
+   
+   private void checkRand() {
+       button1.setIcon(getRandIcon());
+       button2.setIcon(getRandIcon());
+       while(button2.getIcon() == button1.getIcon()) {
+           button2.setIcon(getRandIcon());   
+       }
+       button3.setIcon(getRandIcon());
+       while(button3.getIcon() == button1.getIcon() ||
+               button3.getIcon() == button2.getIcon()) {
+           button3.setIcon(getRandIcon());
+       }
+       button4.setIcon(getRandIcon());
+       while(button4.getIcon() == button1.getIcon() ||
+               button4.getIcon() == button2.getIcon() ||
+               button4.getIcon() == button3.getIcon()) {
+           button4.setIcon(getRandIcon());
+       }
+       button5.setIcon(getRandIcon());
+       while(button5.getIcon() == button1.getIcon() ||
+               button5.getIcon() == button2.getIcon() ||
+               button5.getIcon() == button3.getIcon() ||
+               button5.getIcon() == button4.getIcon()) {
+           button5.setIcon(getRandIcon());
+       }
    }
    
    private ImageIcon getRandIcon() {
@@ -209,35 +233,23 @@ public class ColorBubblesPanel extends JPanel{
        }
        
        game.reset();
-       button1.setIcon(getRandIcon());
-       button2.setIcon(getRandIcon());
-       button3.setIcon(getRandIcon());
-       button4.setIcon(getRandIcon());
-       button5.setIcon(getRandIcon());
+       checkRand();
        chosenColor.setText(game.getChosenColor());
        chosenColor.setForeground(game.getStringColor());
        this.repaint();
        
        numRounds++;
        if(numRounds > 5) {
-           
            endGame();
        }
    }
    
    private void endGame() {
-       remove(chosenColor);
+       removeAll();
+       add(new EndScreen(score));
+       revalidate();
+       repaint();
        
-       
-       endGame = new JLabel("End of Game");
-       endGame.setSize(new Dimension(200,100));
-       endGame.setFont(new Font("Tratello",0,16));
-       add(endGame);
-       
-       scoreSign = new JLabel("Your score: " + score);
-       scoreSign.setSize(new Dimension(200,100));
-       scoreSign.setFont(new Font("Tratello",0,16));
-       add(scoreSign);
    }
    
 }
