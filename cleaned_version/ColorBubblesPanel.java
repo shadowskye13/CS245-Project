@@ -4,7 +4,7 @@
 * class: CS 245 – Programming Graphical User Interfaces
 *
 * assignment: Quarter Project v.1.1
-* date last modified: 10/18/2017
+* date last modified: 10/19/2017
 *
 * purpose: This panel plays the game of Bubble colors.
 * An user is prompted to select the appropriate bubble whose
@@ -143,11 +143,14 @@ public class ColorBubblesPanel extends JPanel{
     }
 
     private void checkColor(JButton button) {
+        // Check that color of button matches the color of the current string
+        String buttonColor = button.getName();
+        if(buttonColor.equals(game.getChosenColorToString())) {
+            score += 100;
+            scoreLabel.setText("Score: " + score);
+        }
 
-        // TODO: Implement check color functionality & update score:
-        // given a button, check if its color matches to the color string
-        // Retrieve score from ColorBubbles.java, or keep track of score in this panel?
-
+        // Refresh bubble board
         game.reset();
         bubblePanel.removeAll();
         remove(bubblePanel);
@@ -156,6 +159,7 @@ public class ColorBubblesPanel extends JPanel{
         chosenColor.setForeground(game.getChosenColor());
         this.repaint();
 
+        // User can only play 5 rounds
         numRounds++;
         if(numRounds > 5) {
             endGame();

@@ -4,7 +4,7 @@
 * class: CS 245 – Programming Graphical User Interfaces
 *
 * assignment: Quarter Project v.1.1
-* date last modified: 10/18/2017
+* date last modified: 10/19/2017
 *
 * purpose: This class contains the main logic of the bubbles
 * game. It selects a random color and a random string associated
@@ -13,19 +13,19 @@
 * PointNClick application
 ****************************************************************/
 
+import java.awt.Color;
 import java.util.Random;
-import java.awt.*;
 
 public class ColorBubbles {
     private String[] colors = new String[]{"green","red","blue","purple","yellow"};
     private String chosenString;
     private Color chosenColor;
-    private int score = 0;
 
     public ColorBubbles() {
         reset();
     }
 
+    // Choose a string, and a color for that string
     public void reset() {
         chooseString();
         chooseColor();
@@ -39,24 +39,35 @@ public class ColorBubbles {
         return chosenString;
     }
 
-    public int getScore() {
-        return score;
-    }
-
-    public boolean checkColor(Color c) {
-        if(c.equals(chosenColor)) {
-            score += 100;
-            return true;
+    // Retrieve the string name representation of the Color assigned
+    public String getChosenColorToString() {
+        if (chosenColor.equals(Color.BLUE)) {
+            return "blue";
         }
-        return false;
+        else if (chosenColor.equals(Color.GREEN)) {
+            return "green";
+        }
+        else if (chosenColor.equals(Color.RED)) {
+            return "red";
+        }
+        else if (chosenColor.equals(Color.MAGENTA)) {
+            return "purple";
+        }
+        else if (chosenColor.equals(Color.YELLOW)) {
+            return "yellow";
+        }
+        else
+            return "";
     }
 
+    // Retrieve a random color name string
     private void chooseString() {
         Random rand = new Random();
         int choice = rand.nextInt(5);
         chosenString = colors[choice];
     }
 
+    // Retrieve a random color for the string shown
     private void chooseColor() {
         Random rand = new Random();
         int choice = rand.nextInt(5);
