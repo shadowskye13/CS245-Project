@@ -31,6 +31,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class HangmanPanel extends JPanel{
@@ -57,8 +58,7 @@ public class HangmanPanel extends JPanel{
     private int score, 
                 miss, 
                 guessed;
-    private JButton skipButton, 
-                    continueButton;
+    private JButton skipButton;
     private ArrayList<JLabel> correctLetters;
     private HashMap<String, JButton> letterButtonMapper;
 
@@ -257,6 +257,12 @@ public class HangmanPanel extends JPanel{
         disableButtons();
         descriptionLabel.setText(result);
         repaint();
+
+        JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
+        menuScreen.removeAll();
+        menuScreen.add(new ColorBubblesPanel(score));
+        menuScreen.revalidate();
+        menuScreen.repaint();
     }
 
     private void disableButtons() {

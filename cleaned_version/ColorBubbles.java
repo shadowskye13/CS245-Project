@@ -4,9 +4,11 @@
 * class: CS 245 – Programming Graphical User Interfaces
 *
 * assignment: Quarter Project v.1.1
-* date last modified: 10/17/2017
+* date last modified: 10/18/2017
 *
-* purpose: 
+* purpose: This class contains the main logic of the bubbles
+* game. It selects a random color and a random string associated
+* with it.
 ****************************************************************/
 
 import java.util.Random;
@@ -14,8 +16,8 @@ import java.awt.*;
 
 public class ColorBubbles {
     private String[] colors = new String[]{"green","red","blue","purple","yellow"};
-    private String chosenColor;
-    private Color stringColor;
+    private String chosenString;
+    private Color chosenColor;
     private int score = 0;
 
     public ColorBubbles() {
@@ -27,12 +29,12 @@ public class ColorBubbles {
         chooseColor();
     }
 
-    public Color getStringColor() {
-        return stringColor;
+    public Color getChosenColor() {
+        return chosenColor;
     }
 
-    public String getChosenColor() {
-        return chosenColor;
+    public String getChosenString() {
+        return chosenString;
     }
 
     public int getScore() {
@@ -40,16 +42,17 @@ public class ColorBubbles {
     }
 
     public boolean checkColor(Color c) {
-        if(c.equals(stringColor)) {
+        if(c.equals(chosenColor)) {
             score += 100;
+            return true;
         }
-        return c.equals(stringColor);
+        return false;
     }
 
     private void chooseString() {
         Random rand = new Random();
         int choice = rand.nextInt(5);
-        chosenColor = colors[choice];
+        chosenString = colors[choice];
     }
 
     private void chooseColor() {
@@ -57,19 +60,19 @@ public class ColorBubbles {
         int choice = rand.nextInt(5);
         switch(choice) {
             case 0:
-                stringColor = Color.RED;
+                chosenColor = Color.RED;
                 break;
             case 1:
-                stringColor = Color.GREEN;
+                chosenColor = Color.GREEN;
                 break;
             case 2:
-                stringColor = Color.BLUE;
+                chosenColor = Color.BLUE;
                 break;
             case 3:
-                stringColor = Color.MAGENTA;
+                chosenColor = Color.MAGENTA;
                 break;
             case 4:
-                stringColor = Color.YELLOW;
+                chosenColor = Color.YELLOW;
                 break;
             default:
                 break;

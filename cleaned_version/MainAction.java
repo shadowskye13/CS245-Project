@@ -43,7 +43,7 @@ public class MainAction extends javax.swing.JFrame{
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainAction("Hangman").setVisible(true);
+                new MainAction("PointNClick").setVisible(true);
             }
         });
     }

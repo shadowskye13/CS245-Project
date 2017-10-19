@@ -10,6 +10,7 @@
 *
 ****************************************************************/
 
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
@@ -95,7 +96,7 @@ public class MenuScreen extends JPanel{
      */
     private void jButton1ActionPerformed(ActionEvent evt) {
         this.removeAll();
-        this.add(new ColorBubblesPanel());
+        this.add(new HangmanPanel());
         this.revalidate();
         this.repaint();
     }
