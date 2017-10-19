@@ -11,6 +11,7 @@
 ****************************************************************/
 
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -30,34 +31,36 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 public class EndScreen extends JPanel{
-    private JButton back;
-    private JLabel endGame;
+    private JButton endButton;
+    private JLabel finalScoreLabel;
+    private int score;
 
     public EndScreen(int score) {
-        checkScore(score);
-        initComponents();
         this.setSize(new Dimension(600,400));
         this.setBackground(new Color(200,200,200));
+
+        this.score = score;
+        checkScore(score);
+        initComponents();
     }
 
     private void initComponents() {
-        back = new JButton("Back");
-        back.setSize(new Dimension(100,50));
-        back.setLocation(500, 500);
-        back.addActionListener(new ActionListener() {
+        // Display final score
+        finalScoreLabel = new JLabel();
+        finalScoreLabel.setText("Your Score: " + score);
+        finalScoreLabel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        finalScoreLabel.setFont(new java.awt.Font("Tahoma",1,40));
+        add(finalScoreLabel);
+
+        // Display end button
+        endButton = new JButton("End");
+        endButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 backToMenuScreen();
             }
         });
-        add(back);
-
-        endGame = new JLabel();
-        endGame.setText("End of Game.");
-        endGame.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        endGame.setSize(new Dimension(200,100));
-        endGame.setFont(new java.awt.Font("Trattatello",0,16));
-        add(endGame);
+        add(endButton);
     }
 
     /**
