@@ -8,7 +8,9 @@
 *
 * purpose: This class contains the main logic of the bubbles
 * game. It selects a random color and a random string associated
-* with it.
+* with it. The score that is being kept track of relates to the
+* bubble game alone, and does not include the score of the entire
+* PointNClick application
 ****************************************************************/
 
 import java.util.Random;

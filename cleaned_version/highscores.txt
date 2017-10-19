@@ -1,5 +1,5 @@
-SuzieQ. . .600
-Joseph. . .500
-Jotaro. . .400
-Kakyoin. . .300
-Avdol. . .200
+test. . .100
+. . .80
+Jotaro. . .0
+Kakyoin. . .0
+Avdol. . .0

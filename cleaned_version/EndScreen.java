@@ -60,39 +60,53 @@ public class EndScreen extends JPanel{
         add(endGame);
     }
 
+    /**
+     * Checks the score the player currently has and if higher than
+     * those from the highscores.txt file, then prompt the user to
+     * input its name
+     */
     private void checkScore(int i) {
         try {
-            File file = new File("highscores.txt");
+            // Retrieve directory file path
+            Path currentRelativePath = Paths.get("");
+            String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
+
+            // Read from highscores file
+            File file = new File(filePath);
             FileReader reader = new FileReader(file);
             BufferedReader buffer = new BufferedReader(reader);
-            String line;
+
+            String line, scoreString;
             int lineCount = 0;
-            String scoreString;
             while((line = buffer.readLine()) != null) {
                 scoreString = line.substring(line.lastIndexOf('.') + 1);
                 if(i > Integer.parseInt(scoreString)) {
-                    changeScores(lineCount,i);
+                    changeScores(lineCount,i,filePath);
                     break;
                 }
                 lineCount++;
             }
         }
         catch(IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 
-    private void changeScores(int line,int score) {
+    /**
+     * Reads the highscores.txt file and adds new high score
+     */
+    private void changeScores(int line, int score, String filePath) {
         String name = (String)JOptionPane.showInputDialog(this,"Please enter your name: ",null);
         name += ". . ." + score;
         try {
-            Path file = Paths.get("highscores.txt");
+            // Retrieve directory file path
+            Path file = Paths.get(filePath);
             List<String> lines = Files.readAllLines(file);
             lines.set(line, name);
             Files.write(file, lines);
         }
         catch(IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
 

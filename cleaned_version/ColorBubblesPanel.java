@@ -162,6 +162,9 @@ public class ColorBubblesPanel extends JPanel{
         }
     }
 
+    /**
+     * End the bubble panel game. Guide the user to the end screen panel
+     */
     private void endGame() {
         JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
         menuScreen.removeAll();

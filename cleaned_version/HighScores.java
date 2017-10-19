@@ -13,13 +13,11 @@
 
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -153,9 +151,15 @@ public class HighScores extends JPanel {
     //purpose: This method is to read high scores from file
     private void getHighScores() {
         try {
-            File file = new File("highscores.txt");
+            // Retrieve directory file path
+            Path currentRelativePath = Paths.get("");
+            String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
+
+            // Read from highscores file
+            File file = new File(filePath);
             FileReader reader = new FileReader(file);
             BufferedReader buffer = new BufferedReader(reader);
+
             String line;
             int lineCount = 0;
             while((line = buffer.readLine()) != null) {
