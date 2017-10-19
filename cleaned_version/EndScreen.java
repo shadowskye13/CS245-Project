@@ -100,8 +100,7 @@ public class EndScreen extends JPanel{
         name += ". . ." + score;
         try {
             // Retrieve directory file path
-            Path currentRelativePath = Paths.get("");
-            String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
+            String filePath = Paths.get("").toAbsolutePath().toString() + "/src/highscores.txt";
             Path file = Paths.get(filePath);
             List<String> lines = Files.readAllLines(file);
             lines.set(line, name);
