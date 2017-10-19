@@ -81,7 +81,7 @@ public class EndScreen extends JPanel{
             while((line = buffer.readLine()) != null) {
                 scoreString = line.substring(line.lastIndexOf('.') + 1);
                 if(i > Integer.parseInt(scoreString)) {
-                    changeScores(lineCount,i,filePath);
+                    changeScores(lineCount,i);
                     break;
                 }
                 lineCount++;
@@ -95,11 +95,13 @@ public class EndScreen extends JPanel{
     /**
      * Reads the highscores.txt file and adds new high score
      */
-    private void changeScores(int line, int score, String filePath) {
+    private void changeScores(int line, int score) {
         String name = (String)JOptionPane.showInputDialog(this,"Please enter your name: ",null);
         name += ". . ." + score;
         try {
             // Retrieve directory file path
+            Path currentRelativePath = Paths.get("");
+            String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
             Path file = Paths.get(filePath);
             List<String> lines = Files.readAllLines(file);
             lines.set(line, name);
@@ -110,6 +112,9 @@ public class EndScreen extends JPanel{
         }
     }
 
+    /**
+     * Return to menu screen
+     */
     private void backToMenuScreen() {
         JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
         menuScreen.removeAll();
