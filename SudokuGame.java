@@ -17,7 +17,11 @@ public class SudokuGame {
    
    
    public SudokuGame(int oldScore) {
-       score = oldScore;
+       score = oldScore + 540;
+   }
+   
+   public int getNum(int a, int b) {
+       return numGrid[a][b];
    }
    
    public boolean checkScore(int a, int b, int button) {
@@ -26,6 +30,7 @@ public class SudokuGame {
             return true;
        }
        else {
+           score = score - 10;
            return false;
        }
    }
