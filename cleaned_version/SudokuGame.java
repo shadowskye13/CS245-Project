@@ -32,7 +32,7 @@ public class SudokuGame {
     }
 
     //method: getNumGrid
-    //purpose: Returns the num grid of the game, with missing user input
+    //purpose: Returns the original num grid of the game (with missing user input)
     public int[][] getNumGrid() {
         return this.numGrid;
     }
@@ -50,25 +50,11 @@ public class SudokuGame {
     }
 
     //method: setNum
-    //purpose: This method checks if the input is a valid integer and set the input to corresponding row and column
-    public boolean setNum(int input, int row, int col) {
-        if(input < 1 || input > 9) {
-            return false;
-        }
-        numGrid[row][col] = input;
-            return true;
-    }
-
-    //method: setNum
-    //purpose: This method checks if the string is a valid input and set the input to corresponding row and column
-    public boolean setNum(String input, int row, int col) {
-        if(validInput(input)) {
-            int num = Integer.parseInt(input);
-            return setNum(num, row, col);
-        }
-        else {
-            return false;
-        }
+    //purpose: This method sets the input to corresponding row and column
+    public void setNum(String input, int row, int col) {
+        int num = Integer.parseInt(input);
+        numGrid[row][col] = num;
+        System.out.println("SETNUM: "+ num + " /row: " + row + " /col: " + col);
     }
 
     //method: validInput

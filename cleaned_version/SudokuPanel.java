@@ -38,7 +38,6 @@ public class SudokuPanel extends JPanel {
     private JLabel titleLabel;
     private JButton submitButton, quitButton;
     private SudokuGame sudGame;
-    private JTextField[][] board;
 
     public SudokuPanel(int score) {
         // Initialize variables
@@ -58,6 +57,7 @@ public class SudokuPanel extends JPanel {
         // Initialize bottomPanel
         initializeBottomPanel();
 
+        // Initialize sudoku board
         buildBoard();
     }
 
@@ -100,12 +100,25 @@ public class SudokuPanel extends JPanel {
 
         // Display submit button
         submitButton = new JButton("Submit");
-        submitButton.setFont(new Font("Trattatello",1,24));
+        submitButton.setFont(new Font("Trattatello",0,16));
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean correct = sudGame.finishedGame();
+                if (correct) {
+                    JOptionPane.showMessageDialog(null, "You correctly answered the sudoku game!");
+                    // TODO: finishGame();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your answer is incorrect. Try again.");
+                    // TODO: resetGame();
+                }
+            }
+        });
         bottomPanel.add(submitButton);
 
         // Display quit button
         quitButton = new JButton("Quit");
-        quitButton.setFont(new Font("Trattatello",1,24));
+        quitButton.setFont(new Font("Trattatello",0,16));
         bottomPanel.add(quitButton);
 
         // Add this panel to main panel
@@ -119,27 +132,36 @@ public class SudokuPanel extends JPanel {
         gameGrid = new JPanel();
         gameGrid.setLayout(new GridLayout(9,9));
 
-        board = new JTextField[9][9];
         int[][] numGrid = sudGame.getNumGrid();
 
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
+                // Set final to make them accessible for listener function
+                final int row = i;
+                final int col = j;
+
                 // Set text field
                 JTextField textField = new JTextField();
+
                 // Fill grid panel with unanswered sudoku numgrid
                 if (numGrid[i][j] != 0) {
                     textField.setEditable(false);
                     textField.setText(Integer.toString(numGrid[i][j]));
                 }
+
                 // check user input
                 textField.addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyReleased(KeyEvent e) {
                         // if there is an input, check if valid
-                        if (textField.getText().length() > 0 && textField.isEditable()) {
-                            if (!sudGame.validInput(textField.getText())) {
+                        String input =  textField.getText();
+                        if (input.length() > 0 && textField.isEditable()) {
+                            if (!sudGame.validInput(input)) {
                                 JOptionPane.showMessageDialog(textField, "Invalid input. Please enter a number between 1-9");
                                 textField.setText("");
+                            }
+                            else {
+                                sudGame.setNum(input,row,col);
                             }
                         }
                     }
@@ -149,6 +171,7 @@ public class SudokuPanel extends JPanel {
             }
         }
 
+        // Add this board panel to main panel
         add(gameGrid, BorderLayout.CENTER);
     }
 
