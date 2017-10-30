@@ -109,9 +109,12 @@ public class SudokuPanel extends JPanel {
         add(bottomPanel, BorderLayout.PAGE_END);
     }
 
+    /**
+     * Builds the sudoku board
+     */
     private void buildBoard() {
         gameGrid = new JPanel();
-        gameGrid.setLayout(new java.awt.GridLayout(9,9));
+        gameGrid.setLayout(new GridLayout(9,9));
         board = new JTextField[9][9];
 
         for(int i = 0; i < 9; i++) {
@@ -125,13 +128,13 @@ public class SudokuPanel extends JPanel {
         }
     }
 
-    private void checkBoard() {
+    /*private void checkBoard() {
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 10; j++) {
                 sudGame.checkScore(i, j, Integer.parseInt(board[i][j].getText()));  
             }
         }
-    }
+    }*/
 
     private int presets(int a,int b) {
         if(a == 0 && b == 0) {
