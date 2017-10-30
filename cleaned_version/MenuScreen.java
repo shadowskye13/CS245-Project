@@ -96,7 +96,7 @@ public class MenuScreen extends JPanel{
      */
     private void jButton1ActionPerformed(ActionEvent evt) {
         this.removeAll();
-        this.add(new HangmanPanel());
+        this.add(new SudokuPanel(100));
         this.revalidate();
         this.repaint();
     }
