@@ -115,112 +115,21 @@ public class SudokuPanel extends JPanel {
     private void buildBoard() {
         gameGrid = new JPanel();
         gameGrid.setLayout(new GridLayout(9,9));
+
         board = new JTextField[9][9];
+        int[][] numGrid = sudGame.getNumGrid();
 
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
-                board[i][j] = new JTextField(2);
-                gameGrid.add(board[i][j]);
-                if(presets(i,j) != 0) {
-                    board[i][j].setText(Integer.toString(presets(i,j)));
+                board[i][j] = new JTextField();
+                if (numGrid[i][j] != 0) {
+                    board[i][j].setText(Integer.toString(numGrid[i][j]));
                 }
+                gameGrid.add(board[i][j]);
             }
         }
-    }
 
-    /*private void checkBoard() {
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 10; j++) {
-                sudGame.checkScore(i, j, Integer.parseInt(board[i][j].getText()));  
-            }
-        }
-    }*/
-
-    private int presets(int a,int b) {
-        if(a == 0 && b == 0) {
-            return sudGame.getNum(0, 0);
-        }
-        else if(a == 0 && b == 3) {
-            return sudGame.getNum(0, 3);
-        }
-        else if(a == 0 && b == 5) {
-            return sudGame.getNum(0, 5);
-        }
-        else if(a == 0 && b == 8) {
-            return sudGame.getNum(0, 8);
-        }
-        else if(a == 1 && b == 6) {
-            return sudGame.getNum(1, 6);
-        }
-        else if(a == 2 && b == 1) {
-            return sudGame.getNum(2, 1);
-        }
-        else if(a == 2 && b == 6) {
-            return sudGame.getNum(2, 6);
-        }
-        else if(a == 2 && b == 7) {
-            return sudGame.getNum(2, 7);
-        }
-        else if(a == 3 && b == 0) {
-            return sudGame.getNum(3, 0);
-        }
-        else if(a == 3 && b == 2) {
-            return sudGame.getNum(3, 2);
-        }
-        else if(a == 3 && b == 4) {
-            return sudGame.getNum(3,4);
-        }
-        else if(a == 3 && b == 6) {
-            return sudGame.getNum(3, 6);
-        }
-        else if(a == 3 && b == 7) {
-            return sudGame.getNum(3, 7);
-        }
-        else if(a == 4 && b == 4) {
-            return sudGame.getNum(4, 4);
-        }
-        else if(a == 5 && b == 1) {
-            return sudGame.getNum(5, 1);
-        }
-        else if(a == 5 && b == 2) {
-            return sudGame.getNum(5, 2);
-        }
-        else if(a == 5 && b == 4) {
-            return sudGame.getNum(5, 4);
-        }
-        else if(a == 5 && b == 6) {
-            return sudGame.getNum(5, 6);
-        }
-        else if(a == 5 && b == 8) {
-            return sudGame.getNum(5, 8);
-        }
-        else if(a == 6 && b == 1) {
-            return sudGame.getNum(6, 1);
-        }
-        else if(a == 6 && b == 2) {
-            return sudGame.getNum(6, 2);
-        }
-        else if(a == 6 && b == 7) {
-            return sudGame.getNum(6, 7);
-        }
-        else if(a == 7 && b == 2) {
-            return sudGame.getNum(7, 2);
-        }
-        else if(a == 8 && b == 0) {
-            return sudGame.getNum(8, 0);
-        }
-        else if(a == 8 && b == 3) {
-            return sudGame.getNum(8, 3);
-        }
-        else if(a == 8 && b == 5) {
-            return sudGame.getNum(8, 5);
-        }
-        else if(a == 8 && b == 8) {
-            return sudGame.getNum(8, 8);
-        }
-        else {
-            return 0;
-        }
+        add(gameGrid, BorderLayout.CENTER);
     }
 
 }

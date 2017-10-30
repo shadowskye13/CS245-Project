@@ -31,6 +31,12 @@ public class SudokuGame {
         firstTime = true;
     }
 
+    //method: getNumGrid
+    //purpose: Returns the num grid of the game, with missing user input
+    public int[][] getNumGrid() {
+        return this.numGrid;
+    }
+
     //method: getNum
     //purpose: This method returns the number of a specific row and column
     public int getNum(int row, int col) {
