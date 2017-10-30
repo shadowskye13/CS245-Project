@@ -24,7 +24,7 @@ public class TitlePanel extends JPanel implements ActionListener{
      */
     public TitlePanel() {
         initComponents();
-        this.setSize(new Dimension(600,400));
+        this.setPreferredSize(new Dimension(600,400));
 
         Timer timer = new Timer(1000,this);
         timer.setInitialDelay(3000);

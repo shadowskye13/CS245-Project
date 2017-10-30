@@ -30,10 +30,12 @@ public class MainAction extends javax.swing.JFrame{
     private void initGUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(titlePanel);
+
         setSize(new Dimension(600,400));
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
         setVisible(true);
+        pack();
     }
 
     /**
