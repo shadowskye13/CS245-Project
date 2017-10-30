@@ -73,7 +73,7 @@ public class SudokuGame {
 
     //method: validInput
     //purpose: This method checks if the input string is valid or not
-    private boolean validInput(String input) {
+    public boolean validInput(String input) {
         try {
             int num = Integer.parseInt(input);
             if(num >= 1 && num <= 9) {
@@ -85,7 +85,7 @@ public class SudokuGame {
         } catch (Exception e) {
             return false;
         }
-}
+    }
 
     //method: finishedGame
     //purpose: This method compares the game with the solution, records the wrong count in order to calculate the final score

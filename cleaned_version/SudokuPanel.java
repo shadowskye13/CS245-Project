@@ -4,7 +4,7 @@
 * class: CS 245 – Programming Graphical User Interfaces
 *
 * assignment: Quarter Project v.1.2
-* date last modified: 10/29/2017
+* date last modified: 10/30/2017
 *
 * purpose: This class displays the panel for the sudoku
 * game. It displays the numbers in a 9x9 grid. When an user
@@ -19,11 +19,14 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -121,11 +124,28 @@ public class SudokuPanel extends JPanel {
 
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
-                board[i][j] = new JTextField();
+                // Set text field
+                JTextField textField = new JTextField();
+                // Fill grid panel with unanswered sudoku numgrid
                 if (numGrid[i][j] != 0) {
-                    board[i][j].setText(Integer.toString(numGrid[i][j]));
+                    textField.setEditable(false);
+                    textField.setText(Integer.toString(numGrid[i][j]));
                 }
-                gameGrid.add(board[i][j]);
+                // check user input
+                textField.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                        // if there is an input, check if valid
+                        if (textField.getText().length() > 0 && textField.isEditable()) {
+                            if (!sudGame.validInput(textField.getText())) {
+                                JOptionPane.showMessageDialog(textField, "Invalid input. Please enter a number between 1-9");
+                                textField.setText("");
+                            }
+                        }
+                    }
+                });
+
+                gameGrid.add(textField);
             }
         }
 
