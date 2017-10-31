@@ -76,14 +76,17 @@ public class HangmanPanel extends JPanel{
 
         // Display game title and description
         descriptionLabel = new JLabel("Welcome!");
+        descriptionLabel.setToolTipText("Welcome to the Hangman Game!");
         add(descriptionLabel);
         titleLabel = new JLabel("Hangman");
+        titleLabel.setToolTipText("The name of the game.");
         titleLabel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         titleLabel.setFont(new Font("Tahoma", 1, 30));
         add(titleLabel);
 
         // Display hangman picture
         hangmanPic = new JLabel();
+        hangmanPic.setToolTipText("The current state of our hangman.");
         hangmanPic.setIcon(new ImageIcon(getClass().getResource("/img/Hangman-0.png")));
         hangmanPic.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -94,6 +97,7 @@ public class HangmanPanel extends JPanel{
 
         // Display skip button
         skipButton = new JButton("Skip");
+        skipButton.setToolTipText("Press this to skip playing Hangman.");
         skipButton.setFont(new Font("Tahoma", 0, 16));
         skipButton.addActionListener(new ActionListener() {
             @Override
@@ -111,6 +115,7 @@ public class HangmanPanel extends JPanel{
 
         // Display score
         scoreLabel = new JLabel("Score: " + score);
+        scoreLabel.setToolTipText("Your current score.");
         scoreLabel.setFont(new Font("Tahoma", 0, 30));
         add(scoreLabel);
 
@@ -158,6 +163,7 @@ public class HangmanPanel extends JPanel{
 
         dateTimeLabel.setFont(new Font("Tahoma", 1, 14));
         dateTimeLabel.setText(dateFormat.format(new Date()));
+        dateTimeLabel.setToolTipText("The current date and time.");
         add(dateTimeLabel);
         Timer time = new Timer(1000, new ActionListener() {
             @Override
@@ -199,6 +205,7 @@ public class HangmanPanel extends JPanel{
             activeLetter = "" + alphabet.charAt(i);
 
             JButton letterButton = new JButton();
+            letterButton.setToolTipText("Press this to select " + activeLetter);
             // each letter button has an action associated with it
             letterButton.addActionListener(new ActionListener() {
                 @Override

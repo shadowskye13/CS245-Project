@@ -80,6 +80,7 @@ public class ColorBubblesPanel extends JPanel{
 
         dateTimeLabel.setFont(new Font("Tahoma", 1, 14));
         dateTimeLabel.setText(dateFormat.format(new Date()));
+        dateTimeLabel.setToolTipText("The current time and date.");
         topPanel.add(dateTimeLabel);
         Timer time = new Timer(1000, new ActionListener() {
             @Override
@@ -95,12 +96,15 @@ public class ColorBubblesPanel extends JPanel{
         chosenColor.setText(game.getChosenString());
         chosenColor.setForeground(game.getChosenColor());
         chosenColor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        chosenColor.setFont(new Font("Trattatello",1,20));
+        chosenColor.setToolTipText("This is the color bubble to select!");
         chosenColor.setFont(new Font("Tratello",1,20));
         topPanel.add(chosenColor);
 
         // Display score
         scoreLabel = new JLabel("Score: " + score);
         scoreLabel.setFont(new Font("Tahoma", 0, 20));
+        scoreLabel.setToolTipText("Your current score.");
         topPanel.add(scoreLabel);
 
         // Add this panel to main panel
@@ -116,6 +120,7 @@ public class ColorBubblesPanel extends JPanel{
             JButton button = new JButton();
 
             button.setName(color);
+            button.setToolTipText("Click me to select this color!");
             button.setIcon(new ImageIcon(getClass().getResource("/img/"+color+".png")));
             button.setRolloverIcon(new ImageIcon(getClass().getResource("/img/"+color+"_hover.png")));
             button.setSize(new Dimension(80,80));
@@ -172,7 +177,7 @@ public class ColorBubblesPanel extends JPanel{
     private void endGame() {
         JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
         menuScreen.removeAll();
-        menuScreen.add(new EndScreen(score));
+        menuScreen.add(new SudokuPanel(score));
         menuScreen.revalidate();
         menuScreen.repaint();
     }

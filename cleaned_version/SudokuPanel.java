@@ -76,6 +76,7 @@ public class SudokuPanel extends JPanel {
 
         dateTimeLabel.setFont(new Font("Tahoma", 1, 14));
         dateTimeLabel.setText(dateFormat.format(new Date()));
+        dateTimeLabel.setToolTipText("The current date and time.");
         topPanel.add(dateTimeLabel);
         Timer time = new Timer(1000, new ActionListener() {
             @Override
@@ -89,6 +90,7 @@ public class SudokuPanel extends JPanel {
         // Display title
         titleLabel = new JLabel("Sudoku");
         titleLabel.setFont(new Font("Trattatello", 1, 30));
+        titleLabel.setToolTipText("The name of the game.");
         topPanel.add(titleLabel);
 
         // Add this panel to main panel
@@ -104,6 +106,7 @@ public class SudokuPanel extends JPanel {
         // Display submit button
         submitButton = new JButton("Submit");
         submitButton.setFont(new Font("Trattatello",0,16));
+        submitButton.setToolTipText("Press me to check if your solution is correct.");
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,6 +128,7 @@ public class SudokuPanel extends JPanel {
         // Display quit button
         quitButton = new JButton("Quit");
         quitButton.setFont(new Font("Trattatello",0,16));
+        quitButton.setToolTipText("Press me to quit playing Sudoku.");
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -151,6 +155,7 @@ public class SudokuPanel extends JPanel {
             for(int j = 0; j < 9; j++) {
                 // Set text field
                 JTextField textField = new JTextField();
+                textField.setToolTipText("Enter a number between 1 and 9 here.");
 
                 // Fill grid panel with unanswered sudoku numgrid
                 if (numGrid[i][j] != 0) {

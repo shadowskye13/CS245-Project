@@ -47,12 +47,14 @@ public class EndScreen extends JPanel{
         // Display final score
         finalScoreLabel = new JLabel();
         finalScoreLabel.setText("Your Score: " + score);
+        finalScoreLabel.setToolTipText("Your final score.");
         finalScoreLabel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         finalScoreLabel.setFont(new java.awt.Font("Tahoma",1,40));
         add(finalScoreLabel);
 
         // Display end button
         endButton = new JButton("End");
+        endButton.setToolTipText("Press me to return to the main menu and play again.");
         endButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {

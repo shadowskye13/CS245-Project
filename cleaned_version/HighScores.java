@@ -27,6 +27,15 @@ public class HighScores extends JPanel {
         initComponents();
         this.setSize(new Dimension(600,400));
         getHighScores();
+
+        // Tooltips
+        jButton1.setToolTipText("Press to return to the main menu.");
+        jLabel1.setToolTipText("High Scores title");
+        jLabel2.setToolTipText("First Highest Score");
+        jLabel3.setToolTipText("Second Highest Score");
+        jLabel4.setToolTipText("Third Highest Score");
+        jLabel5.setToolTipText("Fourth Highest Score");
+        jLabel6.setToolTipText("Fifth Highest Score");
     }
 
      //method: initComponents

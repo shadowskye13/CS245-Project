@@ -20,6 +20,12 @@ public class MenuScreen extends JPanel{
     public MenuScreen() {
         initComponents();
         this.setSize(new Dimension(600,400));
+
+        // Tooltips
+        jButton1.setToolTipText("Press to play games!");
+        jButton2.setToolTipText("Press to view high scores.");
+        jButton3.setToolTipText("Press to view credits.");
+        jLabel2.setToolTipText("Symbol of the GUIneers.");
     }
 
     @SuppressWarnings("unchecked")

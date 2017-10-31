@@ -23,8 +23,6 @@ public class Credits extends JPanel {
         this.setBackground(new java.awt.Color(153, 204, 255));
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -33,27 +31,33 @@ public class Credits extends JPanel {
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        jLabel1.setFont(new java.awt.Font("Trattatello", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trattatello", 0, 24));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("CREDITS");
+        jLabel1.setToolTipText("Credits Title");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel2.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trattatello", 0, 18));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Samantha Harrison, 011687793");
+        jLabel2.setToolTipText("Team Member 1");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel3.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Trattatello", 0, 18));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Wing Hung Lau, 010927657");
+        jLabel3.setToolTipText("Team Member 2");
         jLabel3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jLabel4.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trattatello", 0, 18));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Nelly Liu Peng, 010180248");
+        jLabel4.setToolTipText("Team Member 3");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton1.setFont(new java.awt.Font("Trattatello", 0, 18)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Trattatello", 0, 18));
         jButton1.setText("Back");
+        jButton1.setToolTipText("Press to return to the main menu.");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +105,7 @@ public class Credits extends JPanel {
                 .addComponent(jButton1)
                 .addGap(43, 43, 43))
         );
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     /**
      * When clicked, this button returns back to the menu screen
