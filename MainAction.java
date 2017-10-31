@@ -11,6 +11,7 @@
  */
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 public class MainAction extends javax.swing.JFrame{
     private TitlePanel titlePanel = new TitlePanel();
@@ -37,6 +38,7 @@ public class MainAction extends javax.swing.JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
+        pack();
     }
     
     @SuppressWarnings("unchecked")

@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -25,6 +26,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 public class EndScreen extends JPanel{
@@ -45,6 +47,7 @@ public class EndScreen extends JPanel{
     private void initComponents() {
         // Display end button
         endButton = new JButton("End");
+        endButton.setToolTipText("Press me to return to the main menu and play again.");
         endButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -58,7 +61,85 @@ public class EndScreen extends JPanel{
         finalScoreLabel.setText("Your Score: " + score);
         finalScoreLabel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         finalScoreLabel.setFont(new java.awt.Font("Trattatello",1,40));
+        finalScoreLabel.setToolTipText("Your final score.");
         add(finalScoreLabel);
+        
+        this.getInputMap().put(KeyStroke.getKeyStroke("F1"),"popCredDisplay");
+        this.getActionMap().put("popCredDisplay", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Point N Click Game\n" +
+                        "CS245 Fall 2017\n" + "Samantha Harrison, 011687793\n" +
+                        "Wing Hung Lau, 010927657\n" + "Nelly Liu Peng, 010180248");
+            }
+        });
+        this.getInputMap().put(KeyStroke.getKeyStroke("Esc"),"exit");
+        this.getActionMap().put("exit", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
     
     /**

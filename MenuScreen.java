@@ -13,7 +13,10 @@
  */
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 public class MenuScreen extends javax.swing.JPanel{
     /**
      * method: MenuScreen
@@ -23,6 +26,87 @@ public class MenuScreen extends javax.swing.JPanel{
     public MenuScreen() {
         initComponents();
         this.setSize(new Dimension(600,400));
+        jButton1.setToolTipText("Press to play games!");
+        jButton2.setToolTipText("Press to view high scores.");
+        jButton3.setToolTipText("Press to view credits.");
+        jLabel2.setToolTipText("Symbol of the GUIneers.");
+        
+        this.getInputMap().put(KeyStroke.getKeyStroke("F1"),"popCredDisplay");
+        this.getActionMap().put("popCredDisplay", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Point N Click Game\n" +
+                        "CS245 Fall 2017\n" + "Samantha Harrison, 011687793\n" +
+                        "Wing Hung Lau, 010927657\n" + "Nelly Liu Peng, 010180248");
+            }
+        });
+        this.getInputMap().put(KeyStroke.getKeyStroke("Esc"),"exit");
+        this.getActionMap().put("exit", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
         
     }
 
@@ -75,7 +159,7 @@ public class MenuScreen extends javax.swing.JPanel{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)

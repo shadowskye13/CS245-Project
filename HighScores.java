@@ -12,14 +12,16 @@
  */
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 public class HighScores extends JPanel {
 
     /**
@@ -32,6 +34,90 @@ public class HighScores extends JPanel {
         initComponents();
         this.setSize(new Dimension(600,400));
         getHighScores();
+        jButton1.setToolTipText("Press to return to the main menu.");
+        jLabel1.setToolTipText("High Scores title");
+        jLabel2.setToolTipText("First Highest Score");
+        jLabel3.setToolTipText("Second Highest Score");
+        jLabel4.setToolTipText("Third Highest Score");
+        jLabel5.setToolTipText("Fourth Highest Score");
+        jLabel6.setToolTipText("Fifth Highest Score");
+        
+        this.getInputMap().put(KeyStroke.getKeyStroke("F1"),"popCredDisplay");
+        this.getActionMap().put("popCredDisplay", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Point N Click Game\n" +
+                        "CS245 Fall 2017\n" + "Samantha Harrison, 011687793\n" +
+                        "Wing Hung Lau, 010927657\n" + "Nelly Liu Peng, 010180248");
+            }
+        });
+        this.getInputMap().put(KeyStroke.getKeyStroke("Esc"),"exit");
+        this.getActionMap().put("exit", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     /**
@@ -158,6 +244,9 @@ public class HighScores extends JPanel {
 private void getHighScores() {
     try {
         File file = new File("highscores.txt");
+        // Retrieve directory file path
+            //Path currentRelativePath = Paths.get("");
+            //String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
         FileReader reader = new FileReader(file);
         BufferedReader buffer = new BufferedReader(reader);
         String line;

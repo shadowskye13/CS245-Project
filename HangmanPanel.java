@@ -1,5 +1,5 @@
 
-    /***************************************************************
+/***************************************************************
 * file: HangmanPanel.java
 * author: Samantha Rose, Wing Hung Lau, Nelly Liu Peng
 * class: CS 245 – Programming Graphical User Interfaces
@@ -22,6 +22,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +32,9 @@ import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -78,14 +81,17 @@ public class HangmanPanel extends JPanel{
 
         // Display game title and description
         descriptionLabel = new JLabel("Welcome!");
+        descriptionLabel.setToolTipText("Welcome to the Hangman Game!");
         add(descriptionLabel);
         titleLabel = new JLabel("Hangman");
+        titleLabel.setToolTipText("The name of the game.");
         titleLabel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         titleLabel.setFont(new Font("Tahoma", 1, 30));
         add(titleLabel);
 
         // Display hangman picture
         hangmanPic = new JLabel();
+        hangmanPic.setToolTipText("The current state of our hangman.");
         hangmanPic.setIcon(new ImageIcon(getClass().getResource("/imgs/Hangman-0.png")));
         hangmanPic.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -96,6 +102,7 @@ public class HangmanPanel extends JPanel{
 
         // Display skip button
         skipButton = new JButton("Skip");
+        skipButton.setToolTipText("Press this to skip playing Hangman.");
         skipButton.setFont(new Font("Tahoma", 0, 16));
         skipButton.addActionListener(new ActionListener() {
             @Override
@@ -113,11 +120,89 @@ public class HangmanPanel extends JPanel{
 
         // Display score
         scoreLabel = new JLabel("Score: " + score);
+        scoreLabel.setToolTipText("Your current score.");
         scoreLabel.setFont(new Font("Tahoma", 0, 30));
         add(scoreLabel);
 
         // Build the rest of the logic of the game
         buildGame();
+        
+        this.getInputMap().put(KeyStroke.getKeyStroke("F1"),"popCredDisplay");
+        this.getActionMap().put("popCredDisplay", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Point N Click Game\n" +
+                        "CS245 Fall 2017\n" + "Samantha Harrison, 011687793\n" +
+                        "Wing Hung Lau, 010927657\n" + "Nelly Liu Peng, 010180248");
+            }
+        });
+        this.getInputMap().put(KeyStroke.getKeyStroke("Esc"),"exit");
+        this.getActionMap().put("exit", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     /**
@@ -160,6 +245,7 @@ public class HangmanPanel extends JPanel{
 
         dateTimeLabel.setFont(new Font("Tahoma", 1, 14));
         dateTimeLabel.setText(dateFormat.format(new Date()));
+        dateTimeLabel.setToolTipText("The current date and time.");
         add(dateTimeLabel);
         Timer time = new Timer(1000, new ActionListener() {
             @Override
@@ -201,6 +287,7 @@ public class HangmanPanel extends JPanel{
             activeLetter = "" + alphabet.charAt(i);
 
             JButton letterButton = new JButton();
+            letterButton.setToolTipText("Press this to select " + activeLetter);
             // each letter button has an action associated with it
             letterButton.addActionListener(new ActionListener() {
                 @Override

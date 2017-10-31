@@ -20,6 +20,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,6 +29,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
@@ -66,6 +69,83 @@ public class ColorBubblesPanel extends JPanel{
         bubblePanel = new JPanel();
         bubblePanel.setLayout(null);
         initializeBubbles();
+        
+        this.getInputMap().put(KeyStroke.getKeyStroke("F1"),"popCredDisplay");
+        this.getActionMap().put("popCredDisplay", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Point N Click Game\n" +
+                        "CS245 Fall 2017\n" + "Samantha Harrison, 011687793\n" +
+                        "Wing Hung Lau, 010927657\n" + "Nelly Liu Peng, 010180248");
+            }
+        });
+        this.getInputMap().put(KeyStroke.getKeyStroke("Esc"),"exit");
+        this.getActionMap().put("exit", new javax.swing.Action() {
+            @Override
+            public Object getValue(String key) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void putValue(String key, Object value) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void setEnabled(boolean b) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public boolean isEnabled() {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void addPropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void removePropertyChangeListener(PropertyChangeListener listener) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     /**
@@ -73,6 +153,7 @@ public class ColorBubblesPanel extends JPanel{
      */
     private void initializeTopPanel() {
         topPanel = new JPanel(new GridLayout(1,3));
+        this.getInputMap().put(KeyStroke.getKeyStroke("F1"),"popCredDisplay");
 
         // Display current time and date
         JLabel dateTimeLabel = new JLabel();
@@ -80,6 +161,7 @@ public class ColorBubblesPanel extends JPanel{
 
         dateTimeLabel.setFont(new Font("Tahoma", 1, 14));
         dateTimeLabel.setText(dateFormat.format(new Date()));
+        dateTimeLabel.setToolTipText("The current time and date.");
         topPanel.add(dateTimeLabel);
         Timer time = new Timer(1000, new ActionListener() {
             @Override
@@ -95,12 +177,14 @@ public class ColorBubblesPanel extends JPanel{
         chosenColor.setText(game.getChosenString());
         chosenColor.setForeground(game.getChosenColor());
         chosenColor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        chosenColor.setFont(new Font("Tratello",1,20));
+        chosenColor.setFont(new Font("Trattatello",1,20));
+        chosenColor.setToolTipText("This is the color bubble to select!");
         topPanel.add(chosenColor);
 
         // Display score
         scoreLabel = new JLabel("Score: " + score);
         scoreLabel.setFont(new Font("Tahoma", 0, 20));
+        scoreLabel.setToolTipText("Your current score.");
         topPanel.add(scoreLabel);
 
         // Add this panel to main panel
@@ -116,6 +200,7 @@ public class ColorBubblesPanel extends JPanel{
             JButton button = new JButton();
 
             button.setName(color);
+            button.setToolTipText("Clicl me to select this color!");
             button.setIcon(new ImageIcon(getClass().getResource("/imgs/"+color+".png")));
             button.setRolloverIcon(new ImageIcon(getClass().getResource("/imgs/"+color+"_hover.png")));
             button.setSize(new Dimension(80,80));
@@ -172,7 +257,7 @@ public class ColorBubblesPanel extends JPanel{
     private void endGame() {
         JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
         menuScreen.removeAll();
-        menuScreen.add(new EndScreen(score));
+        menuScreen.add(new SudokuPanel(score));
         menuScreen.revalidate();
         menuScreen.repaint();
     }
