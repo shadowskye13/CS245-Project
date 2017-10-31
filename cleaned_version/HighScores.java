@@ -18,8 +18,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class HighScores extends JPanel {
 
@@ -151,12 +149,8 @@ public class HighScores extends JPanel {
     //purpose: This method is to read high scores from file
     private void getHighScores() {
         try {
-            // Retrieve directory file path
-            Path currentRelativePath = Paths.get("");
-            String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
-
-            // Read from highscores file
-            File file = new File(filePath);
+            // Read from highscores.txt
+            File file = new File("src/highscores.txt");
             FileReader reader = new FileReader(file);
             BufferedReader buffer = new BufferedReader(reader);
 

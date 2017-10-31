@@ -69,12 +69,8 @@ public class EndScreen extends JPanel{
      */
     private void checkScore(int i) {
         try {
-            // Retrieve directory file path
-            Path currentRelativePath = Paths.get("");
-            String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
-
             // Read from highscores file
-            File file = new File(filePath);
+            File file = new File("src/highscores.txt");
             FileReader reader = new FileReader(file);
             BufferedReader buffer = new BufferedReader(reader);
 
@@ -102,8 +98,7 @@ public class EndScreen extends JPanel{
         name += ". . ." + score;
         try {
             // Retrieve directory file path
-            String filePath = Paths.get("").toAbsolutePath().toString() + "/src/highscores.txt";
-            Path file = Paths.get(filePath);
+            Path file = Paths.get("src/highscores.txt");
             List<String> lines = Files.readAllLines(file);
             lines.add(line, name);
             lines.remove(lines.size() - 1);
