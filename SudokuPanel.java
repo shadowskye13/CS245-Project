@@ -1,188 +1,216 @@
 
+/***************************************************************
+* file: SudokuPanel.java
+* author: Samantha Rose, Wing Hung Lau, Nelly Liu Peng
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v.1.2
+* date last modified: 10/30/2017
+*
+* purpose: This class displays the panel for the sudoku
+* game. It displays the numbers in a 9x9 grid. When an user
+* clicks on an empty button, it prompts the user to input a
+* digit.
+****************************************************************/
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.TextArea;
-import java.awt.TextField;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class SudokuPanel extends JPanel {
-    private JPanel gameGrid;
-    private JLabel dateTime,titleLabel;
+
+    // Components
+    private JPanel topPanel, bottomPanel, gameGrid;
+    private JLabel titleLabel;
     private JButton submitButton, quitButton;
     private SudokuGame sudGame;
-    private TextField[][] board;
-    private int score;
-    
+    private JTextField[][] board;
+
     public SudokuPanel(int score) {
-        initComponents();
+        // Initialize variables
         sudGame = new SudokuGame(score);
+
         this.setSize(new Dimension(600,400));
         this.setBackground(new Color(200,200,200));
-        
+        this.setLayout(new BorderLayout());
+
+        initComponents();
     }
-    
+
     private void initComponents() {
-        titleLabel = new JLabel("Sudoku");
-        titleLabel.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        titleLabel.setFont(new Font("Trattatello", 1, 30));
-        add(titleLabel);
-        
-        submitButton = new JButton("Submit");
-        submitButton.setFont(new Font("Trattetello",1,24));
-        add(submitButton);
-        
-        quitButton = new JButton("Quit");
-        quitButton.setFont(new Font("Trattatello",1,24));
-        add(quitButton);
-        
-        displayDateTime();
+        // Initialize topPanel
+        initializeTopPanel();
+
+        // Initialize bottomPanel
+        initializeBottomPanel();
+
+        // Initialize sudoku board
         buildBoard();
     }
-    
+
     /**
-     * This displays the date time label and uses a timer to update
-     * the time every second
+     * Create top panel that includes timer and title string label
      */
-    private void displayDateTime() {
-        dateTime = new JLabel();
+    private void initializeTopPanel() {
+        topPanel = new JPanel(new GridLayout(1,2));
+
+        // Display current time and date
+        JLabel dateTimeLabel = new JLabel();
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 
-        dateTime.setFont(new Font("Tahoma", 1, 14));
-        dateTime.setText(dateFormat.format(new Date()));
-        add(dateTime);
+        dateTimeLabel.setFont(new Font("Tahoma", 1, 14));
+        dateTimeLabel.setText(dateFormat.format(new Date()));
+        topPanel.add(dateTimeLabel);
         Timer time = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                dateTime.setText(dateFormat.format(new Date()));
+                dateTimeLabel.setText(dateFormat.format(new Date()));
             }
         });
         time.setRepeats(true);
         time.start();
+
+        // Display title
+        titleLabel = new JLabel("Sudoku");
+        titleLabel.setFont(new Font("Trattatello", 1, 30));
+        topPanel.add(titleLabel);
+
+        // Add this panel to main panel
+        add(topPanel, BorderLayout.PAGE_START);
     }
-    
+
+    /**
+     * Create bottom panel that includes buttons to submit and quit
+     */
+    private void initializeBottomPanel() {
+        bottomPanel = new JPanel(new GridLayout(1,2));
+
+        // Display submit button
+        submitButton = new JButton("Submit");
+        submitButton.setFont(new Font("Trattatello",0,16));
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean correct = sudGame.finishedGame(board);
+                if (correct) {
+                    JOptionPane.showMessageDialog(null, "You correctly answered the sudoku game!");
+                    endGame();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your answer is incorrect. Try again.");
+                    if(sudGame.isFirst()) {
+                        sudGame.setFirst(false);
+                    }
+                    resetBoard();
+                }
+            }
+        });
+        bottomPanel.add(submitButton);
+
+        // Display quit button
+        quitButton = new JButton("Quit");
+        quitButton.setFont(new Font("Trattatello",0,16));
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                endGame();
+            }
+        });
+        bottomPanel.add(quitButton);
+
+        // Add this panel to main panel
+        add(bottomPanel, BorderLayout.PAGE_END);
+    }
+
+    /**
+     * Builds the sudoku board
+     */
     private void buildBoard() {
         gameGrid = new JPanel();
-        gameGrid.setLayout(new java.awt.GridLayout(9,9));
-        
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 10; j++) {
-                board[i][j] = new TextField(2);
-                gameGrid.add(board[i][j]);
-                if(presets(i,j) != 0) {
-                    board[i][j].setText(Integer.toString(presets(i,j)));
+        gameGrid.setLayout(new GridLayout(9,9));
+        board = new JTextField[9][9];
+
+        int[][] numGrid = sudGame.getNumGrid();
+
+        for(int i = 0; i < 9; i++) {
+            for(int j = 0; j < 9; j++) {
+                // Set text field
+                JTextField textField = new JTextField();
+
+                // Fill grid panel with unanswered sudoku numgrid
+                if (numGrid[i][j] != 0) {
+                    textField.setEditable(false);
+                    textField.setText(Integer.toString(numGrid[i][j]));
+                }
+
+                // check user input
+                textField.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                        // if there is an input, check if valid
+                        String input =  textField.getText();
+                        if (input.length() > 0 && textField.isEditable()) {
+                            if (!sudGame.validInput(input)) {
+                                JOptionPane.showMessageDialog(textField, "Invalid input. Please enter a number between 1-9");
+                                textField.setText("");
+                            }
+                        }
+                    }
+                });
+
+                board[i][j] = textField;
+                gameGrid.add(textField);
+            }
+        }
+
+        // Add this board panel to main panel
+        add(gameGrid, BorderLayout.CENTER);
+    }
+    
+    /**
+     * Checks whether the board is correct. Intended for 
+     * subsequent rounds of sudoku, after user has guessed
+     * again. If, a field is guesssed correctly, the field 
+     * is then made uneditable. Likewise, if the guess is
+     * wrong, the field is made editable so the user can
+     * change their answer.
+     */
+    private void resetBoard() {
+        for(int a = 0; a < 9; a++) {
+            for(int b = 0; b < 9; b++) {
+                if(sudGame.checkIndiv(Integer.parseInt(board[a][b].getText()), a, b)) {
+                    board[a][b].setEditable(false);
+                }
+                else {
+                    board[a][b].setEditable(true);
                 }
             }
         }
     }
-    
-    private void checkBoard() {
-        for(int i = 0; i < 10; i++) {
-            for(int j = 0; j < 10; j++) {
-                sudGame.checkScore(i, j, Integer.parseInt(board[i][j].getText()));  
-            }
-        }
+
+    /**
+     * End the sudoku game. Guide the user to the end screen panel
+     */
+    private void endGame() {
+        JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
+        menuScreen.removeAll();
+        menuScreen.add(new EndScreen(sudGame.getScore()));
+        menuScreen.revalidate();
+        menuScreen.repaint();
     }
-    
-    private int presets(int a,int b) {
-        if(a == 0 && b == 0) {
-            return sudGame.getNum(0, 0);
-        }
-        else if(a == 0 && b == 3) {
-            return sudGame.getNum(0, 3);
-        }
-        else if(a == 0 && b == 5) {
-            return sudGame.getNum(0, 5);
-        }
-        else if(a == 0 && b == 8) {
-            return sudGame.getNum(0, 8);
-        }
-        else if(a == 1 && b == 6) {
-            return sudGame.getNum(1, 6);
-        }
-        else if(a == 2 && b == 1) {
-            return sudGame.getNum(2, 1);
-        }
-        else if(a == 2 && b == 6) {
-            return sudGame.getNum(2, 6);
-        }
-        else if(a == 2 && b == 7) {
-            return sudGame.getNum(2, 7);
-        }
-        else if(a == 3 && b == 0) {
-            return sudGame.getNum(3, 0);
-        }
-        else if(a == 3 && b == 2) {
-            return sudGame.getNum(3, 2);
-        }
-        else if(a == 3 && b == 4) {
-            return sudGame.getNum(3,4);
-        }
-        else if(a == 3 && b == 6) {
-            return sudGame.getNum(3, 6);
-        }
-        else if(a == 3 && b == 7) {
-            return sudGame.getNum(3, 7);
-        }
-        else if(a == 4 && b == 4) {
-            return sudGame.getNum(4, 4);
-        }
-        else if(a == 5 && b == 1) {
-            return sudGame.getNum(5, 1);
-        }
-        else if(a == 5 && b == 2) {
-            return sudGame.getNum(5, 2);
-        }
-        else if(a == 5 && b == 4) {
-            return sudGame.getNum(5, 4);
-        }
-        else if(a == 5 && b == 6) {
-            return sudGame.getNum(5, 6);
-        }
-        else if(a == 5 && b == 8) {
-            return sudGame.getNum(5, 8);
-        }
-        else if(a == 6 && b == 1) {
-            return sudGame.getNum(6, 1);
-        }
-        else if(a == 6 && b == 2) {
-            return sudGame.getNum(6, 2);
-        }
-        else if(a == 6 && b == 7) {
-            return sudGame.getNum(6, 7);
-        }
-        else if(a == 7 && b == 2) {
-            return sudGame.getNum(7, 2);
-        }
-        else if(a == 8 && b == 0) {
-            return sudGame.getNum(8, 0);
-        }
-        else if(a == 8 && b == 3) {
-            return sudGame.getNum(8, 3);
-        }
-        else if(a == 8 && b == 5) {
-            return sudGame.getNum(8, 5);
-        }
-        else if(a == 8 && b == 8) {
-            return sudGame.getNum(8, 8);
-        }
-        else {
-            return 0;
-        }
-    }
-    
 }

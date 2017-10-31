@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author SamanthaRose
- */
-import java.awt.BorderLayout;
+/***************************************************************
+* file: EndScreen.java
+* author: Samantha Rose, Wing Hung Lau, Nelly Liu Peng
+* class: CS 245 – Programming Graphical User Interfaces
+*
+* assignment: Quarter Project v.1.1
+* date last modified: 10/18/2017
+*
+* purpose: This panel shows the end screen displaying an user's
+* score after a game
+****************************************************************/
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -23,19 +20,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -55,9 +43,8 @@ public class EndScreen extends JPanel{
     }
     
     private void initComponents() {
-        endButton = new JButton("Back");
-        endButton.setSize(new Dimension(100,50));
-        endButton.setLocation(500, 500);
+        // Display end button
+        endButton = new JButton("End");
         endButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -66,17 +53,25 @@ public class EndScreen extends JPanel{
         });
         add(endButton);
         
+        // Display final score
         finalScoreLabel = new JLabel();
-        finalScoreLabel.setText("End of Game.");
+        finalScoreLabel.setText("Your Score: " + score);
         finalScoreLabel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        finalScoreLabel.setSize(new Dimension(200,100));
-        finalScoreLabel.setFont(new java.awt.Font("Trattatello",0,16));
+        finalScoreLabel.setFont(new java.awt.Font("Trattatello",1,40));
         add(finalScoreLabel);
     }
     
+    /**
+     * Checks the score the player currently has and if higher than
+     * those from the highscores.txt file, then prompt the user to
+     * input its name
+     */
     private void checkScore(int i) {
         try {
             File file = new File("highscores.txt");
+            // Retrieve directory file path
+            //Path currentRelativePath = Paths.get("");
+            //String filePath = currentRelativePath.toAbsolutePath().toString() + "/src/highscores.txt";
             FileReader reader = new FileReader(file);
             BufferedReader buffer = new BufferedReader(reader);
             String line;
@@ -92,16 +87,21 @@ public class EndScreen extends JPanel{
             }
         }
         catch(IOException e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
     }
+    
+    /**
+     * Reads the highscores.txt file and adds new high score
+     */
     private void changeScores(int line,int score) {
         String name = (String)JOptionPane.showInputDialog(this,"Please enter your name: ",null);
         name += ". . ." + score;
         try {
             Path file = Paths.get("highscores.txt");
             List<String> lines = Files.readAllLines(file);
-            lines.set(line, name);
+            lines.add(line, name);
+            lines.remove(lines.size() - 1);
             Files.write(file, lines);
         }
         catch(IOException e) {
@@ -109,6 +109,9 @@ public class EndScreen extends JPanel{
         }
     }
     
+    /**
+     * Return to menu screen
+     */
     private void backToMenuScreen() {
         JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
         menuScreen.removeAll();

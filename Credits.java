@@ -26,6 +26,8 @@ public class Credits extends JPanel {
         initComponents();
         this.setSize(new Dimension(600,400));
         this.setBackground(new java.awt.Color(153,204,255));
+        jLabel3.setText("Wing Hung Lau, 010927657");
+        jLabel4.setText("Nelly Liu Peng, 010180248");
     }
 
     /**
