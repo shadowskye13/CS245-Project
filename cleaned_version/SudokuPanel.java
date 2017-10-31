@@ -29,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 public class SudokuPanel extends JPanel {
@@ -38,6 +39,7 @@ public class SudokuPanel extends JPanel {
     private JLabel titleLabel;
     private JButton submitButton, quitButton;
     private SudokuGame sudGame;
+    private JTextField[][] board;
 
     public SudokuPanel(int score) {
         // Initialize variables
@@ -104,13 +106,13 @@ public class SudokuPanel extends JPanel {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean correct = sudGame.finishedGame();
+                boolean correct = sudGame.finishedGame(board);
                 if (correct) {
                     JOptionPane.showMessageDialog(null, "You correctly answered the sudoku game!");
-                    // TODO: finishGame();
+                    endGame();
                 } else {
                     JOptionPane.showMessageDialog(null, "Your answer is incorrect. Try again.");
-                    // TODO: resetGame();
+                    // TODO: resetBoard();
                 }
             }
         });
@@ -119,6 +121,12 @@ public class SudokuPanel extends JPanel {
         // Display quit button
         quitButton = new JButton("Quit");
         quitButton.setFont(new Font("Trattatello",0,16));
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                endGame();
+            }
+        });
         bottomPanel.add(quitButton);
 
         // Add this panel to main panel
@@ -131,15 +139,12 @@ public class SudokuPanel extends JPanel {
     private void buildBoard() {
         gameGrid = new JPanel();
         gameGrid.setLayout(new GridLayout(9,9));
+        board = new JTextField[9][9];
 
         int[][] numGrid = sudGame.getNumGrid();
 
         for(int i = 0; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
-                // Set final to make them accessible for listener function
-                final int row = i;
-                final int col = j;
-
                 // Set text field
                 JTextField textField = new JTextField();
 
@@ -160,13 +165,11 @@ public class SudokuPanel extends JPanel {
                                 JOptionPane.showMessageDialog(textField, "Invalid input. Please enter a number between 1-9");
                                 textField.setText("");
                             }
-                            else {
-                                sudGame.setNum(input,row,col);
-                            }
                         }
                     }
                 });
 
+                board[i][j] = textField;
                 gameGrid.add(textField);
             }
         }
@@ -175,4 +178,14 @@ public class SudokuPanel extends JPanel {
         add(gameGrid, BorderLayout.CENTER);
     }
 
+    /**
+     * End the sudoku game. Guide the user to the end screen panel
+     */
+    private void endGame() {
+        JPanel menuScreen = (JPanel) SwingUtilities.getAncestorOfClass(JPanel.class, this);
+        menuScreen.removeAll();
+        menuScreen.add(new EndScreen(sudGame.getScore()));
+        menuScreen.revalidate();
+        menuScreen.repaint();
+    }
 }

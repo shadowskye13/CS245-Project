@@ -1,3 +1,6 @@
+
+import javax.swing.JTextField;
+
 /**
  * file: SudokuGame.java
  * author: S. Harrison, N. Peng, W. Lau
@@ -21,13 +24,14 @@ public class SudokuGame {
         {5,0,9,0,3,0,7,8,0},{0,0,0,0,7,0,0,0,0},{0,4,8,0,2,0,1,0,3},
         {0,5,2,0,0,0,0,9,0},{0,0,1,0,0,0,0,0,0},{3,0,0,9,0,2,0,0,5}};
 
+    private static final int SCORE = 540;
     private int score;
     private boolean firstTime;
 
     //method: SudokuGame
     //purpose: This is the constructor of the SudokuGame
     public SudokuGame(int oldScore) {
-        score = oldScore + 540;
+        score = oldScore + SCORE;
         firstTime = true;
     }
 
@@ -37,24 +41,10 @@ public class SudokuGame {
         return this.numGrid;
     }
 
-    //method: getNum
-    //purpose: This method returns the number of a specific row and column
-    public int getNum(int row, int col) {
-        return solution[row][col];
-    }
-
     //method: getScore
     //purpose: This method returns the score
     public int getScore() {
         return score;
-    }
-
-    //method: setNum
-    //purpose: This method sets the input to corresponding row and column
-    public void setNum(String input, int row, int col) {
-        int num = Integer.parseInt(input);
-        numGrid[row][col] = num;
-        System.out.println("SETNUM: "+ num + " /row: " + row + " /col: " + col);
     }
 
     //method: validInput
@@ -74,12 +64,20 @@ public class SudokuGame {
     }
 
     //method: finishedGame
-    //purpose: This method compares the game with the solution, records the wrong count in order to calculate the final score
-    public boolean finishedGame() {
+    //purpose: This method compares the game with the solution, records the wrong count
+    //in order to calculate the final score
+    //If the user finishes the game before trying to attempt any input, the score
+    //is also taken into account
+    public boolean finishedGame(JTextField[][] board) {
+
+        //TODO: Enhance scoring system. Take in account when user replays game
+
+
         int wrongCount = 0;
         for(int i = 0 ; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
-                if(numGrid[i][j] != solution[i][j]) {
+                if (board[i][j].getText().equals("") ||
+                    Integer.parseInt(board[i][j].getText()) != solution[i][j]) {
                     wrongCount++;
                 }
             }
