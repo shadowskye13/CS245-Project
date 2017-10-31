@@ -5,7 +5,7 @@
 * class: CS 245 – Programming Graphical User Interfaces
 *
 * assignment: Quarter Project v.1.2
-* date last modified: 10/30/2017
+* date last modified: 10/31/2017
 *
 * purpose: This class displays the panel for the sudoku
 * game. It displays the numbers in a 9x9 grid. When an user
@@ -132,6 +132,7 @@ public class SudokuPanel extends JPanel {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                sudGame.resetScore();
                 endGame();
             }
         });
@@ -220,4 +221,5 @@ public class SudokuPanel extends JPanel {
         menuScreen.revalidate();
         menuScreen.repaint();
     }
+
 }
