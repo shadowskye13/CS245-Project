@@ -3,8 +3,8 @@
 * author: Samantha Rose, Wing Hung Lau, Nelly Liu Peng
 * class: CS 245 – Programming Graphical User Interfaces
 *
-* assignment: Quarter Project v1.0
-* date last modified: 10/09/2017
+* assignment: Quarter Project v1.2
+* date last modified: 10/31/2017
 *
 * purpose: This displays the menu screen of the game
 *
@@ -102,7 +102,7 @@ public class MenuScreen extends JPanel{
      */
     private void jButton1ActionPerformed(ActionEvent evt) {
         this.removeAll();
-        this.add(new SudokuPanel(100));
+        this.add(new HangmanPanel());
         this.revalidate();
         this.repaint();
     }
