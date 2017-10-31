@@ -1,4 +1,3 @@
-
 import javax.swing.JTextField;
 
 /**
@@ -35,6 +34,20 @@ public class SudokuGame {
         firstTime = true;
     }
 
+    /**
+     * Returns whether this is the first round of the game.
+     */
+    public boolean isFirst() {
+        return firstTime;
+    }
+
+    /**
+     * Sets the condition of this game round being the first or not.
+     */
+    public void setFirst(boolean cond) {
+        firstTime = cond;
+    }
+
     //method: getNumGrid
     //purpose: Returns the original num grid of the game (with missing user input)
     public int[][] getNumGrid() {
@@ -69,10 +82,6 @@ public class SudokuGame {
     //If the user finishes the game before trying to attempt any input, the score
     //is also taken into account
     public boolean finishedGame(JTextField[][] board) {
-
-        //TODO: Enhance scoring system. Take in account when user replays game
-
-
         int wrongCount = 0;
         for(int i = 0 ; i < 9; i++) {
             for(int j = 0; j < 9; j++) {
@@ -86,6 +95,10 @@ public class SudokuGame {
             score -= wrongCount * 10;
         }
         return (wrongCount == 0);
+    }
+
+    public boolean checkIndiv(int num, int i, int j) {
+        return solution[i][j] == num;
     }
 
 }

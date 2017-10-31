@@ -1,3 +1,4 @@
+
 /***************************************************************
 * file: SudokuPanel.java
 * author: Samantha Rose, Wing Hung Lau, Nelly Liu Peng
@@ -112,7 +113,10 @@ public class SudokuPanel extends JPanel {
                     endGame();
                 } else {
                     JOptionPane.showMessageDialog(null, "Your answer is incorrect. Try again.");
-                    // TODO: resetBoard();
+                    if(sudGame.isFirst()) {
+                        sudGame.setFirst(false);
+                    }
+                    resetBoard();
                 }
             }
         });
@@ -176,6 +180,29 @@ public class SudokuPanel extends JPanel {
 
         // Add this board panel to main panel
         add(gameGrid, BorderLayout.CENTER);
+    }
+
+    /**
+     * Checks whether the board is correct. Intended for
+     * subsequent rounds of sudoku, after user has guessed
+     * again. If, a field is guesssed correctly, the field
+     * is then made uneditable. Likewise, if the guess is
+     * wrong, the field is made editable so the user can
+     * change their answer.
+     */
+    private void resetBoard() {
+        for(int a = 0; a < 9; a++) {
+            for(int b = 0; b < 9; b++) {
+                if (!board[a][b].getText().equals("")) {
+                    if(sudGame.checkIndiv(Integer.parseInt(board[a][b].getText()), a, b)) {
+                        board[a][b].setEditable(false);
+                    }
+                    else {
+                        board[a][b].setEditable(true);
+                    }
+                }
+            }
+        }
     }
 
     /**

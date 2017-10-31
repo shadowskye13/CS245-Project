@@ -105,7 +105,8 @@ public class EndScreen extends JPanel{
             String filePath = Paths.get("").toAbsolutePath().toString() + "/src/highscores.txt";
             Path file = Paths.get(filePath);
             List<String> lines = Files.readAllLines(file);
-            lines.set(line, name);
+            lines.add(line, name);
+            lines.remove(lines.size() - 1);
             Files.write(file, lines);
         }
         catch(IOException e) {
