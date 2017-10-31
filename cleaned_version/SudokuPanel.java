@@ -132,7 +132,7 @@ public class SudokuPanel extends JPanel {
         quitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                sudGame.resetScore();
+                sudGame.finishedGame(board);
                 endGame();
             }
         });

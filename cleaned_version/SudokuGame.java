@@ -24,13 +24,12 @@ public class SudokuGame {
         {0,5,2,0,0,0,0,9,0},{0,0,1,0,0,0,0,0,0},{3,0,0,9,0,2,0,0,5}};
 
     private static final int SCORE = 540;
-    private int score, originalScore;
+    private int score;
     private boolean firstTime;
 
     //method: SudokuGame
     //purpose: This is the constructor of the SudokuGame
     public SudokuGame(int oldScore) {
-        originalScore = oldScore;
         score = oldScore + SCORE;
         firstTime = true;
     }
@@ -59,13 +58,6 @@ public class SudokuGame {
     //purpose: This method returns the score
     public int getScore() {
         return score;
-    }
-
-    /**
-     * Resets the score to original score if user quits the game
-     */
-    public void resetScore() {
-        score = originalScore;
     }
 
     //method: validInput
